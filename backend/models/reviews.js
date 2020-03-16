@@ -1,14 +1,14 @@
 const mongoose = require('mongoose')
 
 const reviewSchema = mongoose.Schema({
-    title: {type: String},
-    released: {type: Number},
-    rated: {type: String},
-    genre: {type: String},
-    director: {type: String},
-    actors: [{type: String}],
-    plot: {type: String},
-    poster: {type: String}
+    Title: {type: String},
+    Released: {type: Number},
+    Rated: {type: String},
+    Genre: {type: String},
+    Director: {type: String},
+    Actors: [{type: String}],
+    Plot: {type: String},
+    Poster: {type: String}
 })
 
 module.exports = mongoose.model('Review', reviewSchema )

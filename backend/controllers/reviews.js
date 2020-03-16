@@ -35,14 +35,14 @@ reviews.delete('/:id', (req, res) => {
 reviews.get('/seed', (req, res)=>{
     Review.create([
         {
-            title: "Interstellar",
-            released: 2014,
-            rated: "PG-13",
-            genre: "Adventure",
-            director: "Christopher Nolan",
-            actors: "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
-            plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
-            poster: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
+            Title: "Interstellar",
+            Released: 2014,
+            Rated: "PG-13",
+            Genre: "Adventure",
+            Director: "Christopher Nolan",
+            Actors: "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
+            Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+            Poster: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGEyLWFmMjktY2FiMmZkNWIyODZiXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg"
         }
     ], (error, data)=>{
         console.log(error);
