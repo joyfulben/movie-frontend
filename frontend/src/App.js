@@ -112,14 +112,16 @@ render(){
       </form>
       </div>
       {this.state.externalMovies.length !== 0 ?
-        <div>
+        <div className=" wrapper">
           {this.state.externalMovies.results.map((movie, i) => {
             return (
-              <li className="external-movie" key={i}>
-              <img className="external-img is-one-quarter" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
-              <div>
-              <h2 onClick={() => this.addMovie(i)} >{movie.title}</h2>
+              <li className="movie" key={i}>
+                              <div className="">
+              <img className="image" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt="Image Not Found!"/>
+              <div className="movieText">
+              <h2 onClick={() => this.addMovie(i)} className="addMovie">{movie.title}</h2>
               <h4>{movie.release_date}</h4>
+              </div>
               </div>
               </li>
             )

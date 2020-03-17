@@ -27,7 +27,38 @@
 .App-link {
   color: #61dafb;
 }
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
 
+}
+.movie {
+  border: 1px solid black;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.movie:hover img{
+  filter: blur(1px);
+  border: 1px solid white;
+}
+.movie:hover .movieText{
+  text-decoration: underline;
+  font-weight: 900;
+}
+.addMovie:hover{
+  cursor: pointer;
+  font-weight: bold;
+}
+.image {
+width: 400px;
+height: auto;
+}
+.movieText{
+  text-align: center;
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
