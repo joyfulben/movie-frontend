@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/bulma.min.css'
+import './css/bulma.min.css';
 import './css/App.css';
 import NavBar from './components/Navbar.js'
 import secret from './secret.js'
