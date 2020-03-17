@@ -122,10 +122,6 @@ render(){
 
   return(
 
-    <div>
-        <h1>Movie Critique</h1>
-         
-
     <>
     <NavBar />
     <div className="container">
@@ -144,29 +140,29 @@ render(){
       <input className="button is-primary "type="submit" value="Find Movie"/>
       </div>
       </form>
-    
+
       </div>
       {this.state.externalMovies.length !== 0 ?
         <div>
-          {this.state.externalMovies.results.map((movie, i) => {
-            return (
-              <li className="external-movie" key={i}>
-              <img className="external-img is-one-quarter" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
-              <div>
+        {this.state.externalMovies.results.map((movie, i) => {
+          return (
+            <li className="external-movie" key={i}>
+            <img className="external-img is-one-quarter" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
+              <>
               <h2 onClick={() => this.addMovie(i)} >{movie.title}</h2>
               <h4>{movie.release_date}</h4>
               <NewForm addMovie={this.addMovie}/>
           {this.state.showForm ? <UpdateForm updateReview={this.state.updateReview} review={this.state.storedMovies} toggleForm={this.toggleForm}/> : <h1>{this.props.bookmark.url}>{this.props.bookmark.title}></h1>}
           <h4 onClick={this.toggleForm}>Update</h4>
           <button onClick={()=>this.state.deleteReview(storedMovies.id)}>X</button>
-              </div>
-              </li>
-            )
-            })
-          }
-        </div>
-        : <div></div>
-      }
+
+            </li>
+          )
+          })
+        }
+      </div>
+      : <div></div>
+    }
       {this.state.storedMovies.length !== 0 ?
       <div><h3>I have movies</h3></div>
       :
@@ -174,7 +170,8 @@ render(){
     }
     {console.log(this.state.storedMovies)}
 
-    </div>
-  )}
+    
+    </>
+  )
 }
 }
