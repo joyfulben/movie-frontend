@@ -67,3 +67,7 @@ height: auto;
     transform: rotate(360deg);
   }
 }
+nav {
+  padding: .5em;
+  font-size: 1.2em;
+}
