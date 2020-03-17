@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/bulma.min.css'
-import './css/App.css';
+import './App.css';
 import NavBar from './Components/Navbar.js'
 import secret from './secret.js'
 let baseURL = ''
