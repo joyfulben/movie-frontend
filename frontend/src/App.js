@@ -1,6 +1,7 @@
 import React from 'react';
 import './css/bulma.min.css'
-import './App.css';
+import './css/App.css';
+import NavBar from './Components/Navbar.js'
 import secret from './secret.js'
 import UpdateForm from './components/UpdateForm.js'
 import NewForm from './components/NewForm.js'
@@ -10,16 +11,11 @@ if (process.env.NODE_ENV === 'development'){
 } else {
   baseURL = 'https://movie-critique.herokuapp.com/'
 }
-
-
-
-
-
  export default class App extends React.Component{
-
    constructor(props){
      super(props)
      this.state = {
+
        externalMovies: [],
        storedMovies: [],
        showForm: false
@@ -28,24 +24,31 @@ if (process.env.NODE_ENV === 'development'){
     this.updateReview = this.updateReview.bind(this)
     this.deleteReview = this.deleteReview.bind(this)
     this.toggleForm = this.toggleForm.bind(this)
+
    }
    componentDidMount(){
-     this.getMovies()
+
    }
-   async getMovies() {
+
+   handleChange (event) {
+     this.setState({ [event.currentTarget.id]: event.currentTarget.value})
+   }
+   async handleQuery (event) {
+     event.preventDefault()
      try {
-       let response = await fetch(`${baseURL}`)
+       let response = await fetch(`${baseURL + this.state.title}&page=1&include_adult=false`)
        let externalData = await response.json()
        this.setState({externalMovies: externalData})
      } catch (e) {
        console.error(e);
      }
    }
-     async addMovie () {
+     async addMovie (i) {
     try{
-      let response = await fetch(baseURL + '/movies', {
+      let response = await fetch('http://localhost:3003/reviews', {
         method: 'POST',
         body: JSON.stringify({
+
             title: this.state.externalMovies.results[i].title,
             release_date: this.state.externalMovies.results[i].release_date,
             overview: this.state.externalMovies.results[i].overview,
@@ -56,9 +59,9 @@ if (process.env.NODE_ENV === 'development'){
         }
       })
       let data = await response.json()
-      const myMovies = [data, ...this.state.myMovieList]
+      const myMovies = [data, ...this.state.storedMovies]
       this.setState({
-        myMovieList: myMovies,
+        storedMovies: myMovies,
         title: '',
         released: '',
         rated: '',
@@ -115,15 +118,63 @@ if (process.env.NODE_ENV === 'development'){
   }
 
 render(){
+  console.log(this.state.externalMovies.results)
+
   return(
+
     <div>
         <h1>Movie Critique</h1>
-         <NewForm addMovie={this.addMovie}/>
-          // <h2>{this.state.externalMovies.Title}</h2>
-          // <img src={`${this.state.externalMovies.Poster}`} />
+         
+
+    <>
+    <NavBar />
+    <div className="container">
+    <h1 className="title is-1  level-item">Movie Critique</h1>
+
+    <div className="tile is-ancestor notification level-item">
+
+      <form onSubmit={this.handleQuery} >
+        <div className="field">
+        <label className="label"htmlFor="title"></label>
+        <div className="control">
+        <input className="input" placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange}/>
+        </div>
+        </div>
+      <div>
+      <input className="button is-primary "type="submit" value="Find Movie"/>
+      </div>
+      </form>
+    
+      </div>
+      {this.state.externalMovies.length !== 0 ?
+        <div>
+          {this.state.externalMovies.results.map((movie, i) => {
+            return (
+              <li className="external-movie" key={i}>
+              <img className="external-img is-one-quarter" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
+              <div>
+              <h2 onClick={() => this.addMovie(i)} >{movie.title}</h2>
+              <h4>{movie.release_date}</h4>
+              <NewForm addMovie={this.addMovie}/>
           {this.state.showForm ? <UpdateForm updateReview={this.state.updateReview} review={this.state.storedMovies} toggleForm={this.toggleForm}/> : <h1>{this.props.bookmark.url}>{this.props.bookmark.title}></h1>}
           <h4 onClick={this.toggleForm}>Update</h4>
           <button onClick={()=>this.state.deleteReview(storedMovies.id)}>X</button>
+              </div>
+              </li>
+            )
+            })
+          }
+        </div>
+        : <div></div>
+      }
+      {this.state.storedMovies.length !== 0 ?
+      <div><h3>I have movies</h3></div>
+      :
+      <div></div>
+    }
+    {console.log(this.state.storedMovies)}
+
     </div>
   )}
+}
 }
