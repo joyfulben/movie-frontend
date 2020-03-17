@@ -6,17 +6,17 @@ const reviewController = require('./controllers/reviews.js')
 const mongoose = require('mongoose')
 app.use(express.json())
 
-// const whitelist = ['http://localhost:3000','https://movie-critique.herokuapp.com/']
-// const corsOptions = {
-//     origin: function (origin, callback) {
-//         if (whitelist.indexOf(origin) !== -1) {
-//             callback(null, true)
-//         } else {
-//             callback(new Error('Blocked by CORS'))
-//         }
-//     }
-// }
-// app.use(cors(corsOptions))
+const whitelist = ['http://localhost:3000','https://movie-critique.herokuapp.com/']
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Blocked by CORS'))
+        }
+    }
+}
+app.use(cors(corsOptions))
 
 
 mongoose.connection.on('error', error => { console.log(error.message + 'Forgot Mongo')})
