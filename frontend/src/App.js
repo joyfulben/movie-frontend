@@ -1,10 +1,10 @@
 import React from 'react';
 import './css/bulma.min.css';
 import './css/App.css';
-import NavBar from './components/Navbar.js'
+import NavBar from './Components/Navbar.js'
 import secret from './secret.js'
-import UpdateForm from './components/UpdateForm.js'
-import NewForm from './components/NewForm.js'
+import UpdateForm from './Components/UpdateForm.js'
+import NewForm from './Components/NewForm.js'
 let baseURL = ''
 if (process.env.NODE_ENV === 'development'){
   baseURL = secret.apikey
@@ -98,9 +98,9 @@ if (process.env.NODE_ENV === 'development'){
              method: 'DELETE'
          })
          let data = await response.json()
-         const foundReview = this.state.storedMoviess.findIndex(review =>
+         const foundReview = this.state.storedMovies.findIndex(review =>
          review._id === id)
-         const copyReviews = [...this.state.storedMoviess]
+         const copyReviews = [...this.state.storedMovies]
          copyReviews.splice(foundReview, 1)
          this.setState({reviews: copyReviews})
      } catch(error){
