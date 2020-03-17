@@ -69,6 +69,21 @@ if (process.env.NODE_ENV === 'development'){
       console.error({'Error': e})
     }
   }
+  async deleteMovie (id){
+      try{
+          let response = await fetch(baseURL + '/reviews/' + id, {
+             method: 'DELETE'
+         })
+         let data = await response.json()
+         const foundReview = this.state.reviews.findIndex(review =>
+         review._id === id)
+         const copyReviews = [...this.state.reviews]
+         copyReviews.splice(foundReview, 1)
+         this.setState({reviews: copyReviews})
+     } catch(e){
+         console.error(e);
+     }
+ }
 
 render(){
   return(
@@ -81,5 +96,3 @@ render(){
     </>
   )
 }
-
-
