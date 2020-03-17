@@ -1,6 +1,7 @@
 import React from 'react';
 import './css/bulma.min.css'
-import './App.css';
+import './css/App.css';
+import NavBar from './Components/Navbar.js'
 import secret from './secret.js'
 let baseURL = ''
 if (process.env.NODE_ENV === 'development'){
@@ -9,7 +10,6 @@ if (process.env.NODE_ENV === 'development'){
   baseURL = 'https://movie-critique.herokuapp.com/'
 }
  export default class App extends React.Component{
-
    constructor(props){
      super(props)
      this.state = {
@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === 'development'){
     this.deleteMovie = this.deleteMovie.bind(this)
    }
    componentDidMount(){
+
    }
 
    handleChange (event) {
@@ -88,15 +89,28 @@ if (process.env.NODE_ENV === 'development'){
  }
 
 render(){
+  console.log(this.state.externalMovies.results)
+
   return(
     <>
-    <h1>Movie Critique</h1>
-    <div className="tile is-ancestor">
-      <form onSubmit={this.handleQuery}>
-        <label htmlFor="title"></label>
-        <input placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange}/>
-        <input type="submit" value="Find Movie"/>
+    <NavBar />
+    <div className="container">
+    <h1 className="title is-1  level-item">Movie Critique</h1>
+
+    <div className="tile is-ancestor notification level-item">
+
+      <form onSubmit={this.handleQuery} >
+        <div className="field">
+        <label className="label"htmlFor="title"></label>
+        <div className="control">
+        <input className="input" placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange}/>
+        </div>
+        </div>
+      <div>
+      <input className="button is-primary "type="submit" value="Find Movie"/>
+      </div>
       </form>
+      </div>
       {this.state.externalMovies.length !== 0 ?
         <div>
           {this.state.externalMovies.results.map((movie, i) => {
