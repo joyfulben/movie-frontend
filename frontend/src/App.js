@@ -1,4 +1,5 @@
 import React from 'react';
+import './css/bulma.min.css'
 import './App.css';
 import secret from './secret.js'
 let baseURL = ''
