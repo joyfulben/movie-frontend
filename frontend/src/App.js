@@ -12,10 +12,6 @@ if (process.env.NODE_ENV === 'development'){
   baseURL = 'https://movie-critique.herokuapp.com/'
 }
 
-
-
-
-
  export default class App extends React.Component{
 
    constructor(props){
