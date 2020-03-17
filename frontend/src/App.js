@@ -124,9 +124,9 @@ render(){
 
     <div>
         <h1>Movie Critique</h1>
-         
 
-    <>
+
+
     <NavBar />
     <div className="container">
     <h1 className="title is-1  level-item">Movie Critique</h1>
@@ -144,7 +144,7 @@ render(){
       <input className="button is-primary "type="submit" value="Find Movie"/>
       </div>
       </form>
-    
+
       </div>
       {this.state.externalMovies.length !== 0 ?
         <div className=" wrapper">
@@ -177,6 +177,6 @@ render(){
     {console.log(this.state.storedMovies)}
 
     </div>
+  </div>
   )}
-}
 }
