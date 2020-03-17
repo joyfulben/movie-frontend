@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import secret from './secret.js'
 let baseURL = ''
+let baseIMG = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2'
 if (process.env.NODE_ENV === 'development'){
   baseURL = secret.apikey
 } else {
@@ -14,7 +15,6 @@ if (process.env.NODE_ENV === 'development'){
 
 
  export default class App extends React.Component{
-
    constructor(props){
      super(props)
      this.state = {
@@ -37,12 +37,12 @@ if (process.env.NODE_ENV === 'development'){
    }
 
 render(){
+  console.log(this.state.externalMovies.results)
+
   return(
     <>
     <h1>Movie Critique</h1>
     <div>
-      <h2>{this.state.externalMovies.Title}</h2>
-      <img src={`${this.state.externalMovies.Poster}`} />
     </div>
     </>
   )
