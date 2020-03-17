@@ -1,54 +1,42 @@
 import React from 'react';
 import './css/bulma.min.css'
 import './css/App.css';
-import NavBar from './Components/Navbar.js'
 import secret from './secret.js'
-import UpdateForm from './components/UpdateForm.js'
-import NewForm from './components/NewForm.js'
+import UpdateForm from './Components/UpdateForm.js'
+import NewForm from './Components/NewForm.js'
+import NavBar from './Components/Navbar'
 let baseURL = ''
 if (process.env.NODE_ENV === 'development'){
   baseURL = secret.apikey
 } else {
   baseURL = 'https://movie-critique.herokuapp.com/'
 }
+
+
+
+
+
  export default class App extends React.Component{
+
    constructor(props){
      super(props)
      this.state = {
-
        externalMovies: [],
        storedMovies: [],
        showForm: false
      }
-    this.getMovies = this.getMovies.bind(this)
+    this.handleQuery = this.handleQuery.bind(this)
     this.updateReview = this.updateReview.bind(this)
     this.deleteReview = this.deleteReview.bind(this)
     this.toggleForm = this.toggleForm.bind(this)
-
-   }
-   componentDidMount(){
-
+    this.addMovie = this.addMovie.bind(this)
    }
 
-   handleChange (event) {
-     this.setState({ [event.currentTarget.id]: event.currentTarget.value})
-   }
-   async handleQuery (event) {
-     event.preventDefault()
-     try {
-       let response = await fetch(`${baseURL + this.state.title}&page=1&include_adult=false`)
-       let externalData = await response.json()
-       this.setState({externalMovies: externalData})
-     } catch (e) {
-       console.error(e);
-     }
-   }
      async addMovie (i) {
     try{
-      let response = await fetch('http://localhost:3003/reviews', {
+      let response = await fetch(baseURL + '/movies', {
         method: 'POST',
         body: JSON.stringify({
-
             title: this.state.externalMovies.results[i].title,
             release_date: this.state.externalMovies.results[i].release_date,
             overview: this.state.externalMovies.results[i].overview,
@@ -59,9 +47,9 @@ if (process.env.NODE_ENV === 'development'){
         }
       })
       let data = await response.json()
-      const myMovies = [data, ...this.state.storedMovies]
+      const myMovies = [data, ...this.state.myMovieList]
       this.setState({
-        storedMovies: myMovies,
+        myMovieList: myMovies,
         title: '',
         released: '',
         rated: '',
@@ -118,14 +106,10 @@ if (process.env.NODE_ENV === 'development'){
   }
 
 render(){
-  console.log(this.state.externalMovies.results)
-
   return(
-
+    <>
     <div>
         <h1>Movie Critique</h1>
-
-
 
     <NavBar />
     <div className="container">
@@ -159,7 +143,7 @@ render(){
               <NewForm addMovie={this.addMovie}/>
           {this.state.showForm ? <UpdateForm updateReview={this.state.updateReview} review={this.state.storedMovies} toggleForm={this.toggleForm}/> : <h1>{this.props.bookmark.url}>{this.props.bookmark.title}></h1>}
           <h4 onClick={this.toggleForm}>Update</h4>
-          <button onClick={()=>this.state.deleteReview(storedMovies.id)}>X</button>
+          <button onClick={()=>this.state.deleteReview(this.state.storedMovies.id)}>X</button>
               </div>
               </div>
               </li>
@@ -174,9 +158,8 @@ render(){
       :
       <div></div>
     }
-    {console.log(this.state.storedMovies)}
-
     </div>
   </div>
+    </>
   )}
 }
