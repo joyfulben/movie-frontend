@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'development'){
    async handleQuery (event) {
      event.preventDefault()
      try {
-       let response = await fetch(`${baseURL + this.state.title}&page=1`)
+       let response = await fetch(`${baseURL + this.state.title}&page=1&include_adult=false`)
        let externalData = await response.json()
        this.setState({externalMovies: externalData})
      } catch (e) {
@@ -82,7 +82,7 @@ render(){
   return(
     <>
     <h1>Movie Critique</h1>
-    <div>
+    <div className="tile is-ancestor">
       <form onSubmit={this.handleQuery}>
         <label htmlFor="title"></label>
         <input placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange}/>
@@ -90,11 +90,15 @@ render(){
       </form>
       {this.state.externalMovies.length !== 0 ?
         <div>
-          {this.state.externalMovies.Search.map((movie, i) => {
+          {this.state.externalMovies.results.map((movie, i) => {
+            console.log(movie)
             return (
-              <li key={i}>
-              <h2>{movie.Title}</h2>
-              <img className="external-img" src={`${movie.Poster}`} alt="" />
+              <li className="columns" key={i}>
+              <img className="external-img is-one-quarter" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
+              <div>
+              <h2 >{movie.title}</h2>
+              <h4>{movie.release_date}</h4>
+              </div>
               </li>
             )
           })
