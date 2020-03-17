@@ -58,15 +58,11 @@ if (process.env.NODE_ENV === 'development'){
         }
       })
       let data = await response.json()
-      const myMovies = [data, ...this.state.myMovieList]
+      const myMovies = [data, ...this.state.storedMovies]
       this.setState({
-        myMovieList: myMovies,
+        storedMovies: myMovies,
         title: '',
         released: '',
-        rated: '',
-        genre: '',
-        director: '',
-        actors : [],
         plot: '',
         poster: ''
       })
