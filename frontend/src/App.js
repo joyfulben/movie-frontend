@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './logo.svg';
+import './css/bulma.min.css'
 import './App.css';
 import secret from './secret.js'
 let baseURL = ''
@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'development'){
        storedMovies: []
      }
     this.getMovies = this.getMovies.bind(this)
+    this.deleteMovie = this.deleteMovie.bind(this)
    }
    componentDidMount(){
      this.getMovies()
@@ -35,6 +36,56 @@ if (process.env.NODE_ENV === 'development'){
        console.error(e);
      }
    }
+     async addMovie () {
+    try{
+      let response = await fetch(baseURL + '/movies', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: this.state.movieExternal[i].title,
+          released: this.state.movieExternal[i].released,
+          rated: this.state.movieExternal[i].rated,
+          genre: this.state.movieExternal[i].genre,
+          director: this.state.movieExternal[i].director,
+          actors: this.state.movieExternal[i].actors,
+          plot: this.state.movieExternal[i].plot,
+          poster: this.state.movieExternal[i].poster,
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      let data = await response.json()
+      const myMovies = [data, ...this.state.myMovieList]
+      this.setState({
+        myMovieList: myMovies,
+        title: '',
+        released: '',
+        rated: '',
+        genre: '',
+        director: '',
+        actors : [],
+        plot: '',
+        poster: ''
+      })
+    }catch(e){
+      console.error({'Error': e})
+    }
+  }
+  async deleteMovie (id){
+      try{
+          let response = await fetch(baseURL + '/reviews/' + id, {
+             method: 'DELETE'
+         })
+         let data = await response.json()
+         const foundReview = this.state.reviews.findIndex(review =>
+         review._id === id)
+         const copyReviews = [...this.state.reviews]
+         copyReviews.splice(foundReview, 1)
+         this.setState({reviews: copyReviews})
+     } catch(e){
+         console.error(e);
+     }
+ }
 
 render(){
   console.log(this.state.externalMovies.results)
@@ -46,7 +97,4 @@ render(){
     </div>
     </>
   )
-}
-
-
 }
