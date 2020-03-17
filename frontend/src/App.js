@@ -22,6 +22,7 @@ if (process.env.NODE_ENV === 'development'){
        storedMovies: []
      }
     this.getMovies = this.getMovies.bind(this)
+    this.deleteMovie = this.deleteMovie.bind(this)
    }
    componentDidMount(){
      this.getMovies()
