@@ -32,7 +32,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-
+  text-align: center;
 }
 .movie {
   border: 1px solid black;
@@ -46,14 +46,16 @@
 }
 .movie:hover .movieText{
   text-decoration: underline;
-  font-weight: 900;
+}
+.movieText:hover{
+  font-weight: bold;
 }
 .addMovie:hover{
   cursor: pointer;
   font-weight: bold;
 }
 .image {
-width: 400px;
+width: 500px;
 height: auto;
 }
 .movieText{
