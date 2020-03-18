@@ -29,8 +29,6 @@ if (process.env.NODE_ENV === 'development'){
        storedMovies: [],
        showForm: false
      }
-    this.updateReview = this.updateReview.bind(this)
-    this.deleteReview = this.deleteReview.bind(this)
     this.toggleForm = this.toggleForm.bind(this)
     this.handleAddExternal = this.handleAddExternal.bind(this)
     this.handleAddInternal = this.handleAddInternal.bind(this)
@@ -86,6 +84,7 @@ if (process.env.NODE_ENV === 'development'){
       try {
         const foundReviewIndex = this.state.storedMovies.findIndex(foundReview => foundReview._id === review._id)
         const copyReviews = [...this.state.storedMovies]
+        let updatedReview = review
         copyReviews[foundReviewIndex] = updatedReview
 
         this.setState({

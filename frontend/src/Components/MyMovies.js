@@ -18,7 +18,7 @@ import React from 'react'
                 }
             })
             let updatedReview = await response.json()
-            this.props.updateReview(review._id)
+            this.props.updateReview(review)
         } catch(error){
             console.log(error);
         }
