@@ -109,23 +109,13 @@ render(){
 <Router>
   <div>
     <NavBar />
-    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies
-    } />} />
+    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies}
+      />} />
     <Route path='/new' exact component={NewForm} />
+    <Route exact path='/' component={() => <><SearchBar handleAddExternal={this.handleAddExternal} baseURL={baseURL} /><MovieDisplay externalMovies={this.state.externalMovies} extURL={extURL} handleAddInternal={this.handleAddInternal} /> </>
+          } />
   </div>
     </Router>
-    <div className="container">
-    <h1 className="title is-1  level-item">Movie Critique</h1>
-
-      <SearchBar handleAddExternal={this.handleAddExternal} baseURL={baseURL} />
-      <MovieDisplay externalMovies={this.state.externalMovies} extURL={extURL} handleAddInternal={this.handleAddInternal} />
-
-     {this.state.storedMovies.length !== 0 ?
-     <div><h3>I have movies</h3></div>
-     :
-     <div></div>
-   }
-   </div>
    </>
  )}
 }

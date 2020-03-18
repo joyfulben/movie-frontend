@@ -38,6 +38,8 @@ export default class MovieDisplay extends Component {
     render(){
         return(
           <>
+          <div className="container">
+
           {this.props.externalMovies.length !== 0 ?
            <div className="wrapper">
              {this.props.externalMovies.results.map((movie, i) => {
@@ -55,6 +57,7 @@ export default class MovieDisplay extends Component {
            </div>
            : <div></div>
          }
+       </div>
          </>
 
        )

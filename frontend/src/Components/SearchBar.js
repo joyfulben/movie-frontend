@@ -28,8 +28,12 @@ export default class SearchBar extends Component {
     }
     render(){
         return(
-          <div className="tile is-ancestor notification level-item">
+          <div className="container">
 
+          <div className="tile is-ancestor notification level-item">
+            <h1 className="title is-1  level-item">Movie Critique</h1>
+            <hr />
+            <br />
           <form onSubmit={this.handleQuery} >
             <div className="field">
             <label className="label"htmlFor="title"></label>
@@ -42,7 +46,7 @@ export default class SearchBar extends Component {
           </div>
           </form>
         </div>
-
+      </div>
 
         )
     }
