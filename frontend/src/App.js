@@ -35,6 +35,8 @@ if (process.env.NODE_ENV === 'development'){
     this.handleAddExternal = this.handleAddExternal.bind(this)
     this.handleAddInternal = this.handleAddInternal.bind(this)
     this.getSavedMovies = this.getSavedMovies.bind(this)
+    this.removeReview = this.removeReview.bind(this)
+    this.updateReview = this.updateReview.bind(this)
    }
    componentDidMount(){
      this.getSavedMovies()
@@ -63,53 +65,44 @@ if (process.env.NODE_ENV === 'development'){
      let updatedSavedList = [movie, ...this.state.storedMovies]
      this.setState({storedMovies: updatedSavedList})
    }
-  async updateReview(event, review){
-      event.preventDefault()
-      try{
-          let response = await fetch(`${baseURL}/reviews/${review._id}`, {
-              body: JSON.stringify(review),
-              method: 'PUT',
-              headers: {
-                  'Accept': 'application/json, text/plain, */*',
-                  'Content-Type': 'application/json'
-              }
-          })
-          let updatedReview = await response.json()
-          const foundReviewIndex = this.state.storedMovies.findIndex(foundReview => foundReview._id === review._id)
-          const copyReviews = [...this.state.storedMovies]
-          copyReviews[foundReviewIndex] = updatedReview
-          this.setState({
-              reviews: copyReviews
-          })
-      } catch(error){
-          console.log(error);
+   toggleForm(){
+      this.setState({showForm: !this.state.showForm})
+    }
+    async removeReview(id){
+      try {
+        const foundReview = this.state.storedMovies.findIndex(review =>
+        review._id === id)
+        const copyReviews = [...this.state.storedMovies]
+
+        copyReviews.splice(foundReview, 1)
+
+        this.setState({storedMovies: copyReviews})
+
+      } catch (e) {
+
       }
-  }
-  async deleteReview (id){
-      try{
-          let response = await fetch(baseURL + '/reviews/' + id, {
-             method: 'DELETE'
-         })
-         let data = await response.json()
-         const foundReview = this.state.storedMoviess.findIndex(review =>
-         review._id === id)
-         const copyReviews = [...this.state.storedMoviess]
-         copyReviews.splice(foundReview, 1)
-         this.setState({reviews: copyReviews})
-     } catch(error){
-         console.error(error);
-     }
- }
- toggleForm(){
-    this.setState({showForm: !this.state.showForm})
-  }
+    }
+    async updateReview(review){
+      try {
+        const foundReviewIndex = this.state.storedMovies.findIndex(foundReview => foundReview._id === review._id)
+        const copyReviews = [...this.state.storedMovies]
+        copyReviews[foundReviewIndex] = updatedReview
+
+        this.setState({
+            storedMovies: copyReviews
+        })
+
+      } catch (e) {
+        console.error(e);
+      }
+    }
 render(){
   return(
     <>
 <Router>
   <div>
     <NavBar />
-    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies}
+    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies} extURL={extURL} toggleForm={this.toggleForm} updateReview={this.updateReview} removeReview={this.removeReview}
       />} />
     <Route path='/new' exact component={NewForm} />
     <Route exact path='/' component={() => <><SearchBar handleAddExternal={this.handleAddExternal} baseURL={baseURL} /><MovieDisplay externalMovies={this.state.externalMovies} extURL={extURL} handleAddInternal={this.handleAddInternal} /> </>

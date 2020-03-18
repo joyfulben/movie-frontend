@@ -6,6 +6,35 @@ import React from 'react'
 
     }
 
+    async updateReview(event, review){
+        event.preventDefault()
+        try{
+            let response = await fetch(`${this.props.extURL}/reviews/${review._id}`, {
+                body: JSON.stringify(review),
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
+                }
+            })
+            let updatedReview = await response.json()
+            this.props.updateReview(review._id)
+        } catch(error){
+            console.log(error);
+        }
+    }
+    async deleteReview (id){
+        try{
+            let response = await fetch(this.props.extURL + '/reviews/' + id, {
+               method: 'DELETE'
+           })
+           let data = await response.json()
+           this.props.removeReview(data._id)
+       } catch(error){
+           console.error(error);
+       }
+   }
+
     render(){
       return(
         <>
