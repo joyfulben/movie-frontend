@@ -1,39 +1,7 @@
 import React from 'react'
-
+import MyMovie from './MyMovie'
   export default class MyMovies extends React.Component {
-    constructor(props) {
-      super(props)
 
-    }
-
-    async updateReview(event, review){
-        event.preventDefault()
-        try{
-            let response = await fetch(`${this.props.extURL}/reviews/${review._id}`, {
-                body: JSON.stringify(review),
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
-                }
-            })
-            let updatedReview = await response.json()
-            this.props.updateReview(review)
-        } catch(error){
-            console.log(error);
-        }
-    }
-    async deleteReview (id){
-        try{
-            let response = await fetch(this.props.extURL + '/reviews/' + id, {
-               method: 'DELETE'
-           })
-           let data = await response.json()
-           this.props.removeReview(data._id)
-       } catch(error){
-           console.error(error);
-       }
-   }
 
     render(){
       return(
@@ -43,13 +11,8 @@ import React from 'react'
           :
           this.props.storedMovies.map((movie, i)=> {
             return (
-            <div>
-              <img src={`${movie.poster_path}`} alt='' />
-              <div>
-                <h2>{movie.title}</h2>
-                <p>{movie.overview}</p>
-              </div>
-            </div>
+
+            <MyMovie movie={movie} />
 
 
             )
