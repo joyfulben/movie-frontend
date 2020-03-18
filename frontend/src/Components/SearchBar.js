@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 
 export default class SearchBar extends Component {
     constructor(props){
-        super(props)
-
+      super(props)
+      this.state = {
+        title: ''
+      }
         this.handleChange = this.handleChange.bind(this)
        this.handleQuery = this.handleQuery.bind(this)
     }
@@ -13,6 +15,7 @@ export default class SearchBar extends Component {
          let response = await fetch(`${this.props.baseURL}query=${this.state.title}&page=1&include_adult=false`)
          let externalData = await response.json()
          this.props.handleAddExternal(externalData)
+         this.setState({title: ""})
        } catch (e) {
          console.error(e);
        }
@@ -31,7 +34,7 @@ export default class SearchBar extends Component {
             <div className="field">
             <label className="label"htmlFor="title"></label>
             <div className="control">
-            <input className="input" placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange}/>
+            <input className="input" placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} required/>
             </div>
             </div>
           <div>
