@@ -27,9 +27,8 @@ if (process.env.NODE_ENV === 'development'){
      this.state = {
        externalMovies: [],
        storedMovies: [],
-       showForm: false
+       review: ''
      }
-    this.toggleForm = this.toggleForm.bind(this)
     this.handleAddExternal = this.handleAddExternal.bind(this)
     this.handleAddInternal = this.handleAddInternal.bind(this)
     this.getSavedMovies = this.getSavedMovies.bind(this)
@@ -63,21 +62,15 @@ if (process.env.NODE_ENV === 'development'){
      let updatedSavedList = [movie, ...this.state.storedMovies]
      this.setState({storedMovies: updatedSavedList})
    }
-   toggleForm(){
-      this.setState({showForm: !this.state.showForm})
-    }
     async removeReview(id){
       try {
         const foundReview = this.state.storedMovies.findIndex(review =>
         review._id === id)
         const copyReviews = [...this.state.storedMovies]
-
         copyReviews.splice(foundReview, 1)
-
         this.setState({storedMovies: copyReviews})
-
-      } catch (e) {
-
+    } catch (error) {
+          console.error(error)
       }
     }
     async updateReview(review){

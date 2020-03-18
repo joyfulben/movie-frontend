@@ -1,16 +1,29 @@
+import UpdateForm from './UpdateForm.js'
+import NewForm from './NewForm.js'
+
+
 import React from 'react'
 
   export default class MyMovies extends React.Component {
     constructor(props) {
       super(props)
-
+      this.state = {
+        author: '',
+        review: '',
+        showForm: false
+      }
+      this.toggleForm = this.toggleForm.bind(this)
+      this.removeReview = this.removeReview.bind(this)
+      this.updateReview = this.updateReview.bind(this)
     }
-
-    async updateReview(event, review){
+    toggleForm(){
+       this.setState({showForm: !this.state.showForm})
+    }
+    async updateReview(event, id){
         event.preventDefault()
         try{
-            let response = await fetch(`${this.props.extURL}/reviews/${review._id}`, {
-                body: JSON.stringify(review),
+            let response = await fetch(this.props.extURL + '/reviews/' + id, {
+                body: JSON.stringify(id),
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -18,23 +31,23 @@ import React from 'react'
                 }
             })
             let updatedReview = await response.json()
-            this.props.updateReview(review)
+            this.props.updateReview(id)
         } catch(error){
             console.log(error);
         }
     }
-    async deleteReview (id){
+    async removeReview (id){
         try{
             let response = await fetch(this.props.extURL + '/reviews/' + id, {
                method: 'DELETE'
            })
            let data = await response.json()
            this.props.removeReview(data._id)
+           console.log(id);
        } catch(error){
            console.error(error);
        }
    }
-
     render(){
       return(
         <>
@@ -47,7 +60,10 @@ import React from 'react'
               <img src={`${movie.poster_path}`} alt='' />
               <div>
                 <h2>{movie.title}</h2>
-                <p>{movie.overview}</p>
+                <h2>{movie.review}</h2>
+                 {this.state.showForm ? <UpdateForm updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/> : <div></div>}
+                 <h4 onClick={this.toggleForm}>Update</h4>
+                 <button onClick={()=>this.removeReview(movie._id)}>X</button>
               </div>
             </div>
 
