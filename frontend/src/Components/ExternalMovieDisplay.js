@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class SearchBar extends Component {
+export default class MovieDisplay extends Component {
     constructor(props){
         super(props)
     }
