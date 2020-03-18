@@ -1,10 +1,12 @@
 import React from 'react';
 import './css/bulma.min.css';
 import './css/App.css';
-import NavBar from './Components/Navbar.js'
+import NavBar from './components/Navbar.js'
 import secret from './secret.js'
-import UpdateForm from './Components/UpdateForm.js'
-import NewForm from './Components/NewForm.js'
+import UpdateForm from './components/UpdateForm.js'
+import NewForm from './components/NewForm.js'
+import MyMovies from './components/MyMovies.js'
+
 let baseURL = ''
 if (process.env.NODE_ENV === 'development'){
   baseURL = secret.apikey
@@ -42,10 +44,10 @@ if (process.env.NODE_ENV === 'development'){
     }
     handleChange (event) {
      this.setState({ [event.currentTarget.id]: event.currentTarget.value})
-   }
+    }
      async addMovie (i) {
     try{
-      let response = await fetch(baseURL + '/movies', {
+      let response = await fetch('http://localhost:3003/reviews', {
         method: 'POST',
         body: JSON.stringify({
             title: this.state.externalMovies.results[i].title,
@@ -116,6 +118,7 @@ render(){
   return(
     <>
     <NavBar />
+
     <div className="container">
     <h1 className="title is-1  level-item">Movie Critique</h1>
 
@@ -134,6 +137,7 @@ render(){
       </form>
 
       </div>
+      <MyMovies reviewedMovies={this.state.storedMovies}/>
       {this.state.externalMovies.length !== 0 ?
        <div>
          {this.state.externalMovies.results.map((movie, i) => {
@@ -155,11 +159,7 @@ render(){
        </div>
        : <div></div>
      }
-     {this.state.storedMovies.length !== 0 ?
-     <div><h3>I have movies</h3></div>
-     :
-     <div></div>
-   }
+
    </div>
    </>
  )}
