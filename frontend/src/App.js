@@ -1,10 +1,14 @@
 import React from 'react';
+import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+
 import './css/bulma.min.css';
 import './css/App.css';
 import secret from './secret.js'
+import MyMovies from './Components/MyMovies.js'
 import UpdateForm from './Components/UpdateForm.js'
 import NewForm from './Components/NewForm.js'
 import NavBar from './Components/Navbar'
+
 import SearchBar from './Components/SearchBar'
 import MovieDisplay from './Components/ExternalMovieDisplay.js'
 let baseURL = ''
@@ -34,6 +38,7 @@ if (process.env.NODE_ENV === 'development'){
    }
    componentDidMount(){
      this.getSavedMovies()
+
    }
    async getSavedMovies(){
      try {
@@ -101,7 +106,14 @@ if (process.env.NODE_ENV === 'development'){
 render(){
   return(
     <>
+<Router>
+  <div>
     <NavBar />
+    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies
+    } />} />
+    <Route path='/new' exact component={NewForm} />
+  </div>
+    </Router>
     <div className="container">
     <h1 className="title is-1  level-item">Movie Critique</h1>
 
