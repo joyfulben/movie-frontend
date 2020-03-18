@@ -73,3 +73,10 @@ nav {
   padding: .5em;
   font-size: 1.2em;
 }
+.my-movies {
+  display: flex;
+  margin: 5px;
+}
+.my-image img {
+  width: 25vw;
+}

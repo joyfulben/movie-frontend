@@ -27,26 +27,27 @@ export default class SearchBar extends Component {
         })
     }
     render(){
-        return(
-          <div className="container">
+      return(
+        <div className="container">
 
-          <div className="tile is-ancestor notification level-item">
-            <h1 className="title is-1  level-item">Movie Critique</h1>
-            <hr />
-            <br />
-          <form onSubmit={this.handleQuery} >
-            <div className="field">
-            <label className="label"htmlFor="title"></label>
-            <div className="control">
-            <input className="input" placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} required/>
-            </div>
-            </div>
-          <div>
-          <input className="button is-primary "type="submit" value="Find Movie"/>
+          <div className="title-search tile is-ancestor is-vertical notification level-item">
+            <h1 className=" title is-1 level-item">Movie Critique</h1>
+            <form className="tile is-parent level-item" onSubmit={this.handleQuery} >
+              <div className="tile is-child is-parent field">
+                <label className="label"htmlFor="title"></label>
+                <div className="control tile is-parent level-item">
+                  <div className="tile is-9">
+                  <input className="input" placeholder="Movie title: Jaws, Shrek, Batman..." type="text" id="title" name="title" onChange={this.handleChange} value={this.state.title} required/>
+                </div>
+                <div className="tile is-child">
+                  <input className="button is-primary "type="submit" value="Find Movie"/>
+                </div>
+              </div>
+              </div>
+
+            </form>
           </div>
-          </form>
         </div>
-      </div>
 
         )
     }

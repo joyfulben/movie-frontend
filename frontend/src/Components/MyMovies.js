@@ -3,8 +3,9 @@ import NewForm from './NewForm.js'
 
 
 import React from 'react'
-
+import MyMovie from './MyMovie'
   export default class MyMovies extends React.Component {
+<<<<<<< HEAD
     constructor(props) {
       super(props)
       this.state = {
@@ -48,6 +49,10 @@ import React from 'react'
            console.error(error);
        }
    }
+=======
+
+
+>>>>>>> aae40ae23964230363d70f3d721e3892c9907658
     render(){
       return(
         <>
@@ -56,6 +61,7 @@ import React from 'react'
           :
           this.props.storedMovies.map((movie, i)=> {
             return (
+<<<<<<< HEAD
             <div>
               <img src={`${movie.poster_path}`} alt='' />
               <div>
@@ -66,6 +72,10 @@ import React from 'react'
                  <button onClick={()=>this.removeReview(movie._id)}>X</button>
               </div>
             </div>
+=======
+
+            <MyMovie movie={movie} />
+>>>>>>> aae40ae23964230363d70f3d721e3892c9907658
 
 
             )

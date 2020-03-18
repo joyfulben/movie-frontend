@@ -22,13 +22,9 @@ export default class MovieDisplay extends Component {
      this.props.handleAddInternal(data)
      this.setState({
        title: '',
-       released: '',
-       rated: '',
-       genre: '',
-       director: '',
-       actors : [],
-       plot: '',
-       poster: ''
+       release_date: '',
+       overview: '',
+       poster_path: ''
      })
    }catch(e){
      console.error({'Error': e})
@@ -39,7 +35,6 @@ export default class MovieDisplay extends Component {
         return(
           <>
           <div className="container">
-
           {this.props.externalMovies.length !== 0 ?
            <div className="wrapper">
              {this.props.externalMovies.results.map((movie, i) => {
