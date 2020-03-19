@@ -5,8 +5,8 @@ const reviewSchema = mongoose.Schema({
     release_date: {type: String},
     overview: {type: String},
     poster_path: {type: String},
-    author: {type: String},
-    review: {type: String}
+    review: {type: String},
+    rating: {type: Number}
 })
 
 module.exports = mongoose.model('Review', reviewSchema )

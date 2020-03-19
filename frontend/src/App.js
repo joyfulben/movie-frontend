@@ -26,15 +26,13 @@ if (process.env.NODE_ENV === 'development'){
      super(props)
      this.state = {
        externalMovies: [],
-       storedMovies: [],
-       showForm: false
+       storedMovies: []
      }
-    this.toggleForm = this.toggleForm.bind(this)
     this.handleAddExternal = this.handleAddExternal.bind(this)
     this.handleAddInternal = this.handleAddInternal.bind(this)
     this.getSavedMovies = this.getSavedMovies.bind(this)
     this.removeReview = this.removeReview.bind(this)
-    this.updateReview = this.updateReview.bind(this)
+    this.updateReviewState = this.updateReviewState.bind(this)
    }
    componentDidMount(){
      this.getSavedMovies()
@@ -63,34 +61,28 @@ if (process.env.NODE_ENV === 'development'){
      let updatedSavedList = [movie, ...this.state.storedMovies]
      this.setState({storedMovies: updatedSavedList})
    }
-   toggleForm(){
-      this.setState({showForm: !this.state.showForm})
-    }
     async removeReview(id){
       try {
         const foundReview = this.state.storedMovies.findIndex(review =>
         review._id === id)
         const copyReviews = [...this.state.storedMovies]
-
         copyReviews.splice(foundReview, 1)
-
         this.setState({storedMovies: copyReviews})
-
-      } catch (e) {
-
+    } catch (error) {
+          console.error(error)
       }
     }
-    async updateReview(review){
+    async updateReviewState(updateReview){
       try {
-        const foundReviewIndex = this.state.storedMovies.findIndex(foundReview => foundReview._id === review._id)
+        const foundReviewIndex = this.state.storedMovies.findIndex(foundReview => {
+        return foundReview._id === updateReview._id
+    })
         const copyReviews = [...this.state.storedMovies]
-        let updatedReview = review
+        let updatedReview = updateReview
         copyReviews[foundReviewIndex] = updatedReview
-
         this.setState({
             storedMovies: copyReviews
         })
-
       } catch (e) {
         console.error(e);
       }
@@ -101,7 +93,7 @@ render(){
 <Router>
   <div>
     <NavBar />
-    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies} extURL={extURL} toggleForm={this.toggleForm} updateReview={this.updateReview} removeReview={this.removeReview}
+    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies} extURL={extURL} toggleForm={this.toggleForm} updateReviewState={this.updateReviewState} removeReview={this.removeReview}
       />} />
     <Route path='/new' exact component={NewForm} />
     <Route exact path='/' component={() => <><SearchBar handleAddExternal={this.handleAddExternal} baseURL={baseURL} /><MovieDisplay externalMovies={this.state.externalMovies} extURL={extURL} handleAddInternal={this.handleAddInternal} /> </>

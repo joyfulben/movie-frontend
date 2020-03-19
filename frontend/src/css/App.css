@@ -73,3 +73,26 @@ nav {
   padding: .5em;
   font-size: 1.2em;
 }
+.my-movies {
+  border: 1px solid black;
+  text-align: center;
+  margin: 2px;
+}
+.my-index {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  flex-flow: wrap;
+}
+.my-image {
+  width: 30vw;
+  margin: 5px;
+}
+.my-text {
+  border: 2px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 5px;
+  width: 30vw;
+  font-size: 12px;
+}
