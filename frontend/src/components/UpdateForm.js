@@ -29,7 +29,7 @@ export default class UpdateForm extends Component {
             <div>
                 <h1>My Review</h1>
                 <form onSubmit={(event)=> {this.props.updateReview(event, this.state); this.props.toggleForm()}}>
-                <textarea class="textarea" rows="5" name="review" id="review" onChange={this.handleChange} value={this.state.review}></textarea>
+                <textarea type="textarea" placeholder="Review" name="review" id="review" onChange={this.handleChange} value={this.state.review}/>
                 <input type="submit"/>
                 </form>
             </div>
