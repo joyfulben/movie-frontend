@@ -8,7 +8,7 @@ const userController = require('./controllers/users_controller.js')
 const sessionsController = require('./controllers/sessions_controller.js')
 const mongoose = require('mongoose')
 app.use(express.json())
-
+ 
 const whitelist = ['http://localhost:3000','https://movie-critique.herokuapp.com/']
 const corsOptions = {
     origin: function (origin, callback) {
