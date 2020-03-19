@@ -73,11 +73,6 @@ nav {
   padding: .5em;
   font-size: 1.2em;
 }
-.my-movies {
-  border: 1px solid black;
-  text-align: center;
-  margin: 2px;
-}
 .my-index {
   display: flex;
   justify-content: space-around;
@@ -85,7 +80,7 @@ nav {
   flex-flow: wrap;
 }
 .my-image {
-  width: 30vw;
+  width: 20vw;
   margin: 5px;
 }
 .my-text {
@@ -95,4 +90,12 @@ nav {
   margin: 5px;
   width: 30vw;
   font-size: 12px;
+}
+.my-movie {
+  text-align: center;
+}
+.my-plot {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px;
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import UpdateForm from './UpdateForm.js'
-import StarRatingComponent from 'react-star-rating-component';
+import StarRatingComponent from 'react-star-rating-component'
 
 
 export default class MyMovie extends React.Component {
@@ -10,7 +10,8 @@ export default class MyMovie extends React.Component {
       showPlot: false,
       review: '',
       rating: 0,
-      showForm: false
+      showForm: false,
+      showPlot: false
     }
     this.toggleForm = this.toggleForm.bind(this)
     this.removeReview = this.removeReview.bind(this)
@@ -67,8 +68,8 @@ export default class MyMovie extends React.Component {
   const { rating } = this.state;
     return(
       <>
-          <div>
-            <img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${this.props.movie.poster_path}`} alt=""/>
+          <div className="my-movie">
+            <img className="my-image" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${this.props.movie.poster_path}`} alt=""/>
             <div>
               <h2>{this.props.movie.title}</h2>
               <h2>{this.props.movie.review}</h2>
@@ -76,10 +77,23 @@ export default class MyMovie extends React.Component {
                name="rate1"
                starCount={5}
                value={this.state.rating}
-               onStarClick={this.onStarClick.bind(this)}/>
-               {this.state.showForm ? <UpdateForm storedMovie={this.props.storedMovies[this.props.i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/> : <div></div>}
-               <h4 onClick={this.toggleForm}>Create Review</h4>
+               onStarClick={this.onStarClick.bind(this)}
+               />
+               {this.state.showForm
+                 ? <UpdateForm storedMovie={this.props.storedMovies[this.props.i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/>
+                 : <div></div>}
+
+               <button onClick={this.toggleForm}>Create Review</button> <br/>
+               <div className="my-plot">
+               <button onClick={this.togglePlot}>Plot Summary</button>
                <button onClick={()=>this.removeReview(this.props.movie._id)}>X</button>
+               </div>
+               {this.state.showPlot ?
+                 <p className="my-text">{this.props.movie.overview}</p> :
+                 null
+               }
+
+
             </div>
           </div>
       </>

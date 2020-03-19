@@ -1,6 +1,5 @@
 import React from 'react'
 import MyMovie from './MyMovie'
-import StarRatingComponent from 'react-star-rating-component';
 
   export default class MyMovies extends React.Component {
     render(){
