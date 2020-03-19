@@ -27,9 +27,9 @@ export default class UpdateForm extends Component {
         console.log(this.state);
         return(
             <div>
-                <h1>Update Review</h1>
+                <h1>My Review</h1>
                 <form onSubmit={(event)=> {this.props.updateReview(event, this.state); this.props.toggleForm()}}>
-                <input type="text" placeholder="Review" name="review" id="review" onChange={this.handleChange} value={this.state.review}/>
+                <input type="textarea" placeholder="Review" name="review" id="review" onChange={this.handleChange} value={this.state.review}/>
                 <input type="submit"/>
                 </form>
             </div>

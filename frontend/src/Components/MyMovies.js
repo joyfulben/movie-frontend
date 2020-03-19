@@ -70,7 +70,7 @@ import MyMovie from './MyMovie'
                 <h2>{movie.title}</h2>
                 <h2>{movie.review}</h2>
                  {this.state.showForm ? <UpdateForm storedMovie={this.props.storedMovies[i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/> : <div></div>}
-                 <h4 onClick={this.toggleForm}>Update</h4>
+                 <h4 onClick={this.toggleForm}>Create Review</h4>
                  <button onClick={()=>this.removeReview(movie._id)}>X</button>
               </div>
             </div>

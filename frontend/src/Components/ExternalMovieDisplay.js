@@ -40,11 +40,11 @@ export default class MovieDisplay extends Component {
              {this.props.externalMovies.results.map((movie, i) => {
                return (
                  <li className="movie" key={i}>
-                 <img onClick={() => this.addMovie(i)} className="image" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
+                 <a href="/my_movies"><img onClick={() => this.addMovie(i)} className="image" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
                  <div className="movieText">
                  <h2  onClick={() => this.addMovie(i)} >{movie.title}</h2>
                  <h4>{movie.release_date}</h4>
-                 </div>
+                 </div></a>
                  </li>
                )
                })
