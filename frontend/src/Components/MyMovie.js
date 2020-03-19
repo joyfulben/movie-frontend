@@ -67,8 +67,8 @@ export default class MyMovie extends React.Component {
           <div className="my-movie">
             <img className="my-image" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${this.props.movie.poster_path}`} alt=""/>
             <div>
-              <h2>{this.props.movie.title}</h2>
-              <h2>{this.props.movie.review}</h2>
+              <h2 className="my-title hero is-small is-warning is-bold">{this.props.movie.title}</h2>
+              <h2 className="my-review">{this.props.movie.review}</h2>
                {this.state.showForm
                  ? <UpdateForm storedMovie={this.props.storedMovies[this.props.i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/>
                  : <div></div>}

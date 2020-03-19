@@ -17,7 +17,7 @@ if (process.env.NODE_ENV === 'development'){
   baseURL = secret.apikey
   extURL = secret.extkey
 } else {
-  baseURL = 'https://movie-critique.herokuapp.com/'
+  baseURL = 'https://movie-critique-backend.herokuapp.com/'
 }
 
  export default class App extends React.Component{

@@ -1,3 +1,10 @@
+/* font-family: 'Baloo 2', cursive;
+font-family: 'Raleway', sans-serif;
+font-family: 'Baloo Thambi 2', cursive;
+font-family: 'Abril Fatface', cursive;
+font-family: 'Spicy Rice', cursive;
+font-family: 'Marcellus', serif; */
+
 .App {
   text-align: center;
 }
@@ -26,6 +33,9 @@
 
 .App-link {
   color: #61dafb;
+}
+.navbar {
+  font-family: 'Baloo Thambi 2', cursive;
 }
 .wrapper {
   display: flex;
@@ -80,7 +90,7 @@ nav {
   flex-flow: wrap;
 }
 .my-image {
-  width: 20vw;
+  width: 28vw;
   margin: 5px;
 }
 .my-text {
@@ -98,4 +108,15 @@ nav {
   display: flex;
   justify-content: space-around;
   margin: 10px;
+}
+.my-review {
+  font-family: 'Marcellus', serif;
+  font-weight: bold;
+  font-size: 12px;
+  width: 30vw;
+  text-align: left;
+}
+.my-title {
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
 }
