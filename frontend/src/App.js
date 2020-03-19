@@ -26,9 +26,7 @@ if (process.env.NODE_ENV === 'development'){
      super(props)
      this.state = {
        externalMovies: [],
-       storedMovies: [],
-       review: '',
-       rating: 0
+       storedMovies: []
      }
     this.handleAddExternal = this.handleAddExternal.bind(this)
     this.handleAddInternal = this.handleAddInternal.bind(this)
