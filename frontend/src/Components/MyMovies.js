@@ -1,5 +1,5 @@
 import UpdateForm from './UpdateForm.js'
-import NewForm from './NewForm.js'
+import StarRatingComponent from 'react-star-rating-component';
 
 
 import React from 'react'
@@ -8,8 +8,8 @@ import MyMovie from './MyMovie'
     constructor(props) {
       super(props)
       this.state = {
-        author: '',
         review: '',
+        rating: 0,
         showForm: false
       }
       this.toggleForm = this.toggleForm.bind(this)
@@ -17,6 +17,9 @@ import MyMovie from './MyMovie'
       this.updateReview = this.updateReview.bind(this)
       this.handleChange = this.handleChange.bind(this)
     }
+    onStarClick(nextValue, prevValue, name) {
+    this.setState({rating: nextValue});
+  }
     toggleForm(){
        this.setState({showForm: !this.state.showForm})
     }
@@ -57,6 +60,7 @@ import MyMovie from './MyMovie'
        }
    }
     render(){
+    const { rating } = this.state;
       return(
         <>
         {this.props.storedMovies.length === 0 ?
@@ -65,10 +69,15 @@ import MyMovie from './MyMovie'
           this.props.storedMovies.map((movie, i)=> {
             return (
             <div>
-              <img src={`${movie.poster_path}`} alt='' />
+              <img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
               <div>
                 <h2>{movie.title}</h2>
                 <h2>{movie.review}</h2>
+                <StarRatingComponent
+                 name="rate1"
+                 starCount={5}
+                 value={movie.rating}
+                 onStarClick={this.onStarClick.bind(this)}/>
                  {this.state.showForm ? <UpdateForm storedMovie={this.props.storedMovies[i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/> : <div></div>}
                  <h4 onClick={this.toggleForm}>Create Review</h4>
                  <button onClick={()=>this.removeReview(movie._id)}>X</button>
