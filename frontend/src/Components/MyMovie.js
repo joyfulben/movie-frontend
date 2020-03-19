@@ -9,7 +9,6 @@ export default class MyMovie extends React.Component {
     this.state = {
       showPlot: false,
       review: '',
-      rating: 0,
       showForm: false,
       showPlot: false
     }
@@ -18,9 +17,6 @@ export default class MyMovie extends React.Component {
     this.updateReview = this.updateReview.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.togglePlot = this.togglePlot.bind(this)
-    }
-    onStarClick(nextValue, prevValue, name) {
-    this.setState({rating: nextValue});
     }
     toggleForm(){
      this.setState({showForm: !this.state.showForm})
@@ -73,12 +69,6 @@ export default class MyMovie extends React.Component {
             <div>
               <h2>{this.props.movie.title}</h2>
               <h2>{this.props.movie.review}</h2>
-              <StarRatingComponent
-               name="rate1"
-               starCount={5}
-               value={this.state.rating}
-               onStarClick={this.onStarClick.bind(this)}
-               />
                {this.state.showForm
                  ? <UpdateForm storedMovie={this.props.storedMovies[this.props.i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/>
                  : <div></div>}
