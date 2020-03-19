@@ -66,8 +66,10 @@ import MyMovie from './MyMovie'
         {this.props.storedMovies.length === 0 ?
           <div><h2>You don't have any reviewed movies yet!</h2></div>
           :
-          this.props.storedMovies.map((movie, i)=> {
+          <div className="my-index">
+          {this.props.storedMovies.map((movie, i)=> {
             return (
+<<<<<<< HEAD
             <div>
               <img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${movie.poster_path}`} alt=""/>
               <div>
@@ -85,8 +87,13 @@ import MyMovie from './MyMovie'
             </div>
 
 
+=======
+
+                <MyMovie movie={movie} />
+>>>>>>> 855ecdec66145876e69d284be1bf14af7e26529e
             )
-          })
+          })}
+          </div>
         }
         </>
       )
