@@ -1,6 +1,6 @@
 import React from 'react'
 import UpdateForm from './UpdateForm.js'
-import StarRatingComponent from 'react-star-rating-component'
+import StarRatingComponent from 'react-star-rating-component';
 
 
 export default class MyMovie extends React.Component {
@@ -10,17 +10,14 @@ export default class MyMovie extends React.Component {
       showPlot: false,
       review: '',
       rating: 0,
-      showForm: false,
-      showPlot: false
+      showForm: false
     }
     this.toggleForm = this.toggleForm.bind(this)
     this.removeReview = this.removeReview.bind(this)
     this.updateReview = this.updateReview.bind(this)
     this.handleChange = this.handleChange.bind(this)
     this.togglePlot = this.togglePlot.bind(this)
-    }
-    onStarClick(nextValue, prevValue, name) {
-    this.setState({rating: nextValue});
+    this.saveStar = this.saveStar.bind(this)
     }
     toggleForm(){
      this.setState({showForm: !this.state.showForm})
@@ -33,6 +30,26 @@ export default class MyMovie extends React.Component {
     togglePlot () {
       this.setState({showPlot: !this.state.showPlot})
     }
+    onStarClick(nextValue, prevValue, name) {
+   this.setState({rating: nextValue});
+ }
+    async saveStar(rating){
+        console.log(rating);
+    try{
+      let response = await fetch(`${this.props.extURL}/reviews/${rating._id}`, {
+        body: JSON.stringify(rating),
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        }
+      })
+      let updatedRating = await response.json()
+      this.props.updateStarState(updatedRating)
+    } catch(e){
+      console.log(e);
+    }
+  }
     async updateReview(event, review){
       console.log(review);
       event.preventDefault()
@@ -66,10 +83,11 @@ export default class MyMovie extends React.Component {
     }
   render(){
   const { rating } = this.state;
+  console.log(this.props.movie);
     return(
       <>
-          <div className="my-movie">
-            <img className="my-image" src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${this.props.movie.poster_path}`} alt=""/>
+          <div>
+            <img src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${this.props.movie.poster_path}`} alt=""/>
             <div>
               <h2>{this.props.movie.title}</h2>
               <h2>{this.props.movie.review}</h2>
@@ -77,23 +95,10 @@ export default class MyMovie extends React.Component {
                name="rate1"
                starCount={5}
                value={this.state.rating}
-               onStarClick={this.onStarClick.bind(this)}
-               />
-               {this.state.showForm
-                 ? <UpdateForm storedMovie={this.props.storedMovies[this.props.i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/>
-                 : <div></div>}
-
-               <button onClick={this.toggleForm}>Create Review</button> <br/>
-               <div className="my-plot">
-               <button onClick={this.togglePlot}>Plot Summary</button>
+               onStarClick={() => {this.onStarClick.bind(this); this.saveStar(this.props.movie)}}/>
+               {this.state.showForm ? <UpdateForm storedMovie={this.props.storedMovies[this.props.i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/> : <div></div>}
+               <h4 onClick={this.toggleForm}>Create Review</h4>
                <button onClick={()=>this.removeReview(this.props.movie._id)}>X</button>
-               </div>
-               {this.state.showPlot ?
-                 <p className="my-text">{this.props.movie.overview}</p> :
-                 null
-               }
-
-
             </div>
           </div>
       </>
