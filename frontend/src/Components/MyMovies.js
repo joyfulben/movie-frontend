@@ -5,7 +5,6 @@ import NewForm from './NewForm.js'
 import React from 'react'
 import MyMovie from './MyMovie'
   export default class MyMovies extends React.Component {
-<<<<<<< HEAD
     constructor(props) {
       super(props)
       this.state = {
@@ -16,23 +15,31 @@ import MyMovie from './MyMovie'
       this.toggleForm = this.toggleForm.bind(this)
       this.removeReview = this.removeReview.bind(this)
       this.updateReview = this.updateReview.bind(this)
+      this.handleChange = this.handleChange.bind(this)
     }
     toggleForm(){
        this.setState({showForm: !this.state.showForm})
     }
-    async updateReview(event, id){
+    handleChange(event){
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+    async updateReview(event, review){
+        console.log(review);
         event.preventDefault()
         try{
-            let response = await fetch(this.props.extURL + '/reviews/' + id, {
-                body: JSON.stringify(id),
+            let response = await fetch(`${this.props.extURL}/reviews/${review.id}`, {
+                body: JSON.stringify(review),
                 method: 'PUT',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
                 }
             })
-            let updatedReview = await response.json()
-            this.props.updateReview(id)
+            let updateReview = await response.json()
+            this.props.updateReviewState(updateReview)
         } catch(error){
             console.log(error);
         }
@@ -49,10 +56,6 @@ import MyMovie from './MyMovie'
            console.error(error);
        }
    }
-=======
-
-
->>>>>>> aae40ae23964230363d70f3d721e3892c9907658
     render(){
       return(
         <>
@@ -61,21 +64,16 @@ import MyMovie from './MyMovie'
           :
           this.props.storedMovies.map((movie, i)=> {
             return (
-<<<<<<< HEAD
             <div>
               <img src={`${movie.poster_path}`} alt='' />
               <div>
                 <h2>{movie.title}</h2>
                 <h2>{movie.review}</h2>
-                 {this.state.showForm ? <UpdateForm updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/> : <div></div>}
+                 {this.state.showForm ? <UpdateForm storedMovie={this.props.storedMovies[i]} updateReview={this.updateReview} review={this.state.review} toggleForm={this.toggleForm}/> : <div></div>}
                  <h4 onClick={this.toggleForm}>Update</h4>
                  <button onClick={()=>this.removeReview(movie._id)}>X</button>
               </div>
             </div>
-=======
-
-            <MyMovie movie={movie} />
->>>>>>> aae40ae23964230363d70f3d721e3892c9907658
 
 
             )

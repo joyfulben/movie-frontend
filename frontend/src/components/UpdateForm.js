@@ -14,20 +14,22 @@ export default class UpdateForm extends Component {
         })
     }
     componentDidMount(){
-        if (this.props.storedMovies) {
+        console.log(this.props.storedMovie);
+        if (this.props.storedMovie) {
             this.setState({
-                author: this.props.storedMovies.author,
-                review: this.props.storedMovies.review,
-                id: this.props.storedMovies._id
+                author: '',
+                review: '',
+                id: this.props.storedMovie._id
             })
         }
     }
     render() {
+        console.log(this.state);
         return(
             <div>
                 <h1>Update Review</h1>
-                <form onSubmit={(event)=> {this.props.updateReview(event, this.props.review); this.props.toggleForm()}}>
-                <input type="text" placeholder="Review" name="review" onChange={this.handleChange} value={this.state.review}/>
+                <form onSubmit={(event)=> {this.props.updateReview(event, this.state); this.props.toggleForm()}}>
+                <input type="text" placeholder="Review" name="review" id="review" onChange={this.handleChange} value={this.state.review}/>
                 <input type="submit"/>
                 </form>
             </div>
