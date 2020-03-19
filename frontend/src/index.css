@@ -1,5 +1,6 @@
-.external-img {
-  width: 15vw;
+.title-search {
+  display: flex;
+  flex-direction: column;
 }
 
 .external-movie {
@@ -13,4 +14,7 @@ form {
 }
 h1 {
   margin: 20px;
+}
+.my-image {
+  width: 20%;
 }
