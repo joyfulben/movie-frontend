@@ -9,14 +9,14 @@ import MyMovie from './MyMovie'
         {this.props.storedMovies.length === 0 ?
           <div><h2>You don't have any reviewed movies yet!</h2></div>
           :
-          this.props.storedMovies.map((movie, i)=> {
+          <div className="my-index">
+          {this.props.storedMovies.map((movie, i)=> {
             return (
 
-            <MyMovie movie={movie} />
-
-
+                <MyMovie movie={movie} />
             )
-          })
+          })}
+          </div>
         }
         </>
       )
