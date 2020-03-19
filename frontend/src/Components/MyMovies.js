@@ -11,7 +11,7 @@ import MyMovie from './MyMovie'
           <div className="my-index">
           {this.props.storedMovies.map((movie, i)=> {
             return (
-            <MyMovie movie={movie} i={i} storedMovies={this.props.storedMovies} extURL={this.props.extURL} toggleForm={this.props.toggleForm} updateReviewState={this.props.updateReviewState} removeReview={this.props.removeReview}/>
+            <MyMovie movie={movie} i={i} storedMovies={this.props.storedMovies} extURL={this.props.extURL} toggleForm={this.props.toggleForm} updateReviewState={this.props.updateReviewState} updateStarState={this.props.updateStarState} removeReview={this.props.removeReview}/>
         )
       })}
       </div>
