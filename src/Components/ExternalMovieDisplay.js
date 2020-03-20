@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 export default class MovieDisplay extends Component {
     constructor(props){
         super(props)
