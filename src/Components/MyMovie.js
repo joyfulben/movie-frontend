@@ -1,7 +1,5 @@
 import React from 'react'
 import UpdateForm from './UpdateForm.js'
-import StarRatingComponent from 'react-star-rating-component'
-
 
 export default class MyMovie extends React.Component {
   constructor(props) {
