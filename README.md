@@ -15,3 +15,4 @@ Overall we are satisfied with the end result, but wish we had more time to tie u
 Live site: https://movie-critique.herokuapp.com
 Original repo before we spunoff front and backend: https://github.com/joyfulben/Movie-Review
 Trello: https://trello.com/b/UN509aBV/movie-review-project
+Backend repo: https://github.com/joyfulben/movie_backend
