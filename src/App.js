@@ -91,7 +91,6 @@ if (process.env.NODE_ENV === 'development'){
 render(){
   return(
     <>
-    <h2>hello world</h2>
 <Router>
   <div>
     <NavBar />
