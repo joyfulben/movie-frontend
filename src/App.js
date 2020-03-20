@@ -15,7 +15,6 @@ let baseURL = ''
 let extURL = ''
 if (process.env.NODE_ENV === 'development'){
   baseURL = secret.apikey
-  extURL = secret.extkey
 } else {
   baseURL = 'https://movie-critique-backend.herokuapp.com/'
 }
@@ -40,9 +39,10 @@ if (process.env.NODE_ENV === 'development'){
    }
    async getSavedMovies(){
      try {
-       let response = await fetch(extURL + '/reviews')
+       let response = await fetch(baseURL + '/reviews')
        let InternalData = await response.json()
        this.setState({storedMovies: InternalData})
+       console.log(response)
      } catch (e) {
        console.error(e);
      }
@@ -94,10 +94,10 @@ render(){
 <Router>
   <div>
     <NavBar />
-    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies} extURL={extURL} toggleForm={this.toggleForm} updateReviewState={this.updateReviewState} removeReview={this.removeReview}
+    <Route exact path='/my_movies' component={() => <MyMovies storedMovies={this.state.storedMovies} extURL={baseURL} toggleForm={this.toggleForm} updateReviewState={this.updateReviewState} removeReview={this.removeReview}
       />} />
     <Route path='/new' exact component={NewForm} />
-    <Route exact path='/' component={() => <><SearchBar handleAddExternal={this.handleAddExternal} baseURL={baseURL} /><MovieDisplay externalMovies={this.state.externalMovies} extURL={extURL} handleAddInternal={this.handleAddInternal} /> </>
+    <Route exact path='/' component={() => <><SearchBar handleAddExternal={this.handleAddExternal} baseURL={baseURL} /><MovieDisplay externalMovies={this.state.externalMovies} extURL={baseURL} handleAddInternal={this.handleAddInternal} /> </>
           } />
   </div>
     </Router>
