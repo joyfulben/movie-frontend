@@ -6,7 +6,7 @@ export default class MovieDisplay extends Component {
     }
     async addMovie (i) {
    try{
-     let response = await fetch(this.props.extURL + '/reviews', {
+     let response = await fetch(this.props.extURL + 'reviews', {
        method: 'POST',
        body: JSON.stringify({
            title: this.props.externalMovies.results[i].title,
