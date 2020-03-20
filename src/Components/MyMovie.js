@@ -31,7 +31,7 @@ export default class MyMovie extends React.Component {
       console.log(review);
       event.preventDefault()
       try{
-          let response = await fetch(`${this.props.extURL}/reviews/${review.id}`, {
+          let response = await fetch(`${this.props.extURL}reviews/${review.id}`, {
               body: JSON.stringify(review),
               method: 'PUT',
               headers: {
@@ -48,7 +48,7 @@ export default class MyMovie extends React.Component {
     }
     async removeReview (id){
       try{
-          let response = await fetch(this.props.extURL + '/reviews/' + id, {
+          let response = await fetch(this.props.extURL + 'reviews/' + id, {
              method: 'DELETE'
          })
          let data = await response.json()
