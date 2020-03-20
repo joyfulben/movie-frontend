@@ -41,8 +41,6 @@ if (process.env.NODE_ENV === 'development'){
      try {
        let response = await fetch(extURL + 'reviews', {
          headers: {
-           'Accept': 'application/json, text/plain, */*',
-           'Content-Type': 'application/json',
            'Access-Control-Allow-Origin': '*'
        }} )
 
