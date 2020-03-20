@@ -1,68 +1,17 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+For our MERN stack project we created a fullstack movie review app utilizing Node.js, Mongoose, Express and React. It also makes use of React Router, CORS, Bulma CSS framework, and an external API. Our main goal was to have the user be able to search for any movie they wanted, have a homepage display the results of that search, and then enable the reviewer to add that film to their collection page where they can then review it.
 
-## Available Scripts
+We decided to use themoviedb for our external API because it allowed for us to pull an entire page worth of results at a time, which was required to fulfill our main user story. We used this API in tandem with our own local API in order to store the user’s collection of movies and subsequently add their own reviews on their “My Movies” page.
 
-In the project directory, you can run:
+The backend of our app utilizes the MVC file structure to streamline our code, as well as the seven RESTFUL routes and full CRUD in order to allow for the user to add movies to their collection, view their movies, create/update their reviews, and delete the movie from their collection.
 
-### `npm start`
+On the frontend we made use of Create React App in conjunction with React Router as a means to develop a single page application with multiple views. This was necessary to fulfill our user story in which we have a main landing page where the user searches for and adds movies to their collection, as well as a separate view where they could maintain their collection.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+When it came to styling our app we decided to use Bulma for our CSS framework because we wanted to challenge ourselves and experiment with something different. While we had all previously worked with Bootstrap, we felt like Bulma was unexplored territory that we wanted to get some experience with. While it was rewarding to get exposure to this new framework it would ultimately end up being one of the first of many hurdles in the development process.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Some other challenges we ran into throughout the course of development that we hope to resolve in the future are implementing authentication, adding dynamic star ratings to each movie in our collection, and getting comfortable enough with Bulma to include portfolio-quality styling in our app. While we came close to including many of these features, we ultimately didn’t get everything functioning perfectly ahead of the deadline and felt that they should be left out for future implementation.
 
-### `npm test`
+Overall we are satisfied with the end result, but wish we had more time to tie up the loose ends described above. Both React and Bulma were extremely challenging to work with, but the experience was invaluable.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Live site: https://movie-critique.herokuapp.com
+Original repo before we spunoff front and backend: https://github.com/joyfulben/Movie-Review
+Trello: https://trello.com/b/UN509aBV/movie-review-project
