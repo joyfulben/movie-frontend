@@ -39,7 +39,13 @@ if (process.env.NODE_ENV === 'development'){
    }
    async getSavedMovies(){
      try {
-       let response = await fetch(extURL + 'reviews')
+       let response = await fetch(extURL + 'reviews', {
+         headers: {
+           'Accept': 'application/json, text/plain, */*',
+           'Content-Type': 'application/json',
+           'Access-Control-Allow-Origin': '*'
+       }} )
+
        let InternalData = await response.json()
        this.setState({storedMovies: InternalData})
        console.log(response)
